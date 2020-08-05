@@ -1,0 +1,67 @@
+<ion-app>
+  <ion-header class="ion-no-border">
+    <ion-toolbar lines='none'>
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon color="dark" slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ion-toolbar>
+  </ion-header>
+  <ion-content slot="fixed" class="ion-padding">
+    <form [formGroup]="mobileForm">
+      <ion-text class="ion-text-left">
+        <h1>Sign In </h1>
+      </ion-text>
+      <ion-item style="margin-top: 40px;">
+        <ion-input formControlName="mobileNumber" minLength="10" maxLength="10" type="text" placeholder="Mobile Number">
+        </ion-input>
+      
+      </ion-item>
+  
+
+      <ion-item lines='none'>
+        <ion-grid >
+          <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+              <ion-item *ngIf="!enableOTP" lines='none' class="ion-padding">
+                <ion-button expand="block" color="primary" fill="solid" size="default" (click)="GetOTP()">
+                  GET-OTP
+
+                </ion-button>
+
+              </ion-item>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+    </form>
+
+    <form [formGroup]="otpForm">
+      <ion-item *ngIf="enableOTP" style="margin-top: 20px;">
+        <ion-input formControlName="otp" minLength="6" maxLength="6" type="text" placeholder="OTP"></ion-input>
+      </ion-item>
+   
+      <ion-item lines='none'>
+        <ion-grid >
+          <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+              <ion-item lines='none' *ngIf="enableOTP" class="ion-padding">
+                <ion-button expand="block" color="primary" fill="solid" size="default" (click)="validateOTP()">
+                  VALIDATE OTP
+        
+                </ion-button>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </form>
+  </ion-content>
+</ion-app>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenHelper } from '../_helpers/TokenHelper';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private router:Router) {}
+  logout(){
+    TokenHelper.RemoveLoginToken();
+    TokenHelper.RemoveUserDetails();
+    this.router.navigate(['/login'])
+    
+  }
 
 }

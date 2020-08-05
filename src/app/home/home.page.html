@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">
+      Create Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+
+
+    <ion-item class="ion-text-capitalize">
+      <ion-label position="floating" color="primary"><b>FULL NAME &nbsp;(As per ID proof)</b>
+      </ion-label>
+      <ion-input required formControlName="fullName" color="primary" type="text"></ion-input>
+    </ion-item>
+    <!-- <ion-item class="ion-text-capitalize">
+      <ion-label position="floating" color="primary"><b>LAST NAME</b></ion-label>
+      <ion-input formControlName="lastName" color="primary" type="text"></ion-input>
+    </ion-item> -->
+
+
+    <ion-text color="primary">
+      <p class="label-gender ion-text-start ion-padding"><b>Gender</b></p>
+    </ion-text>
+    <ion-list class="profile-list">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4" *ngFor="let item of gender; index as i">
+            <div (click)='selectGender(item)' [ngClass]="{'profile-check-gender': gender[i].selected}"
+              class="profile-radio-btn">
+              <p class="radio">{{item.gender}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+    <!-- <ion-radio-group value="grape">
+      <ion-list-header>
+        <ion-label>Fruit</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Apple</ion-label>
+        <ion-radio slot="start" color="success" value="apple"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Grape</ion-label>
+        <ion-radio slot="start" color="tertiary" value="grape"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Cherry</ion-label>
+        <ion-radio slot="start" color="danger" value="cherry"></ion-radio>
+      </ion-item>
+    </ion-radio-group> -->
+    <ion-text color="primary">
+      <p class="label-gender ion-text-start ion-padding"><b>DATE OF BIRTH</b>
+      </p>
+    </ion-text>
+    <ion-list class="profile-list">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4">
+            <div style="text-align: center" class="a">
+              <ion-select class="profile-select" placeholder="Day" required [interfaceOptions]="dateSheetOptions"
+                formControlName="date">
+                <ion-select-option *ngFor="let item of date" value="{{ item }}">{{item}}</ion-select-option>
+
+              </ion-select>
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div style="text-align: center">
+              <ion-select class="profile-select" placeholder="Month" formControlName="month"
+                [interfaceOptions]="monthSheetOptions">
+                <ion-select-option value="01">January</ion-select-option>
+                <ion-select-option value="02">February</ion-select-option>
+                <ion-select-option value="03">March</ion-select-option>
+                <ion-select-option value="04">April</ion-select-option>
+                <ion-select-option value="05">May</ion-select-option>
+                <ion-select-option value="06">June</ion-select-option>
+                <ion-select-option value="07">July</ion-select-option>
+                <ion-select-option value="08">August</ion-select-option>
+                <ion-select-option value="09">September</ion-select-option>
+                <ion-select-option value="10">October</ion-select-option>
+                <ion-select-option value="11">November</ion-select-option>
+                <ion-select-option value="12">December</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div style="text-align: center">
+              <ion-select class="profile-select" placeholder="Year" formControlName="year"
+                [interfaceOptions]="yearSheetOptions">
+                <ion-select-option *ngFor="let item of year" value="{{ item }}">{{
+                    item
+                  }}</ion-select-option>
+              </ion-select>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-button class="ion-margin" expand="block" color="primary" type="submit">
+      <span><b>UPDATE</b></span>
+    </ion-button>
+
+  </form>
+  <!-- <div class="ion-padding" *ngIf="isLoggedIn === true">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Hi, {{users.name}}</ion-card-subtitle>
+        <ion-card-title>{{users.email}}</ion-card-title>
+      </ion-card-header>
+      <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
+      <ion-card-content>
+        <p>
+          <ion-button expand="full" color="secondary" (click)="logout()">
+            Logout
+            <ion-icon name="log-out"></ion-icon>
+          </ion-button>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="ion-padding" *ngIf="isLoggedIn === false">
+    <ion-button expand="full" color="primary" (click)="fbLogin()">
+     Connect with &nbsp;
+      <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+  </div> -->
+</ion-content>
