@@ -2,6 +2,10 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
+import { Iaadhar } from '../_models/aadhar';
+import { ServiceProxy } from '../_helpers/ServiceProxy';
+import { TokenHelper } from '../_helpers/TokenHelper';
 
 declare var google;
 @Component({
@@ -10,11 +14,47 @@ declare var google;
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  url = this.serviceProxy.BASE_URL + '/';
+  profileImage: any;
+  userProfile: Iaadhar;
   options: GeolocationOptions;
   currentPos: Geoposition;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  constructor(private geolocation: Geolocation,public menuController: MenuController,private router:Router) { }
+  enable: boolean;
+  gender:any
+  constructor(private geolocation: Geolocation, public menuController: MenuController, private router: Router, private auth: AuthService, private serviceProxy: ServiceProxy,) { }
+
+  ionViewDidEnter() {
+
+    this.auth.currentUserSubject.subscribe((data) => {
+      this.userProfile = data;
+      console.log(this.userProfile)
+      this.gender=this.userProfile.gender['gender']
+      this.profileImage = this.userProfile.image;
+      this.enable = true;
+    });
+    //this.getUserPosition();
+  }
+  openSideMenu() {
+    this.menuController.enable(true, 'first');
+    this.menuController.open('first');
+  }
+  editProfile() {
+    this.menuController.close('first');
+    this.router.navigate(['/profile'])
+  }
+  logout(){
+    this.menuController.close('first');
+    TokenHelper.RemoveLoginToken();
+    TokenHelper.RemoveUserDetails();
+    this.router.navigate(['/login'])
+    
+  }
+  changeMobileNumber(){
+    this.menuController.close('first');
+    this.router.navigate(['/mobilenumberchange'])
+  }
   getUserPosition() {
     this.options = {
       enableHighAccuracy: false
@@ -30,9 +70,6 @@ export class Tab1Page {
       console.log("error : " + err.message);
       ;
     })
-  }
-  ionViewDidEnter() {
-    this.getUserPosition();
   }
   addMap(lat, long) {
 
@@ -66,12 +103,5 @@ export class Tab1Page {
     });
 
   }
-  openSideMenu() {
-    this.menuController.enable(true, 'first');
-    this.menuController.open('first');
-  }
-  editProfile(){
-    this.menuController.close('first');
-    this.router.navigate(['/home'])
-  }
+
 }

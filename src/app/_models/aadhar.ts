@@ -1,15 +1,15 @@
-export class Iaadhar{
-    id?:string;
-    mobileNumber?:string;
-    fullName?:string;
-    dateofBirth?:string;
-    gender?:IGender;
-    image?:string;
-    accountCreated?:Date;
-    profileCompletion:boolean;
-    profilePercentage?:number;
-    idProof?:string;
-  
+export class Iaadhar {
+    id?: string;
+    mobileNumber?: string;
+    fullName?: string;
+    dateofBirth?: string;
+    gender?: IGender;
+    image?: string;
+    accountCreated?: Date;
+    profileCompletion: boolean;
+    profilePercentage?: number;
+    kyc?:boolean;
+
 }
 
 export interface IResponse {
@@ -37,4 +37,7 @@ export class IGender {
     id: number;
     gender: string;
     selected: boolean;
-  }
+}
+export class IOTP {
+    otp: string;
+}

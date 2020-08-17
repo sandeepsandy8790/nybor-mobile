@@ -7,10 +7,7 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),canActivate:[AuthGuard]
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),canActivate:[AuthGuard]
-  },
+ 
   // {
   //   path: '',
   //   loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -22,7 +19,20 @@ const routes: Routes = [
   {
     path: 'otp',
     loadChildren: () => import('./otp/otp.module').then( m => m.OtpPageModule)
-  }
+  },
+  {
+    path: 'otp/changeMobileNumber',
+    loadChildren: () => import('./otp/otp.module').then( m => m.OtpPageModule),canActivate:[AuthGuard]
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),canActivate:[AuthGuard]
+  },
+  {
+    path: 'mobilenumberchange',
+    loadChildren: () => import('./mobilenumberchange/mobilenumberchange.module').then( m => m.MobilenumberchangePageModule),canActivate:[AuthGuard]
+  },
+ 
 ];
 @NgModule({
   imports: [

@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
             const t = TokenHelper.GetLoginToken();
             if (arg) {
                 if (t) {
-                    // alert(this.auth.getWhoAmI())
+                  
                
                     return true
                 }

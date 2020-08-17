@@ -25,6 +25,7 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "com.razorpay.cordova": "^1.4.12",
     "cordova-android": "8.1.0",
     "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-geolocation": "^4.0.2",
@@ -76,7 +77,8 @@
         "APP_ID": "209741693693693",
         "APP_NAME": "myFirstApp"
       },
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "com.razorpay.cordova": {}
     },
     "platforms": [
       "android"

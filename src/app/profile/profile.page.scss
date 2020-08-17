@@ -1,0 +1,83 @@
+.profile{
+    &-list{
+        margin: 0 0.5rem;
+      }
+      &-radio-btn{
+        border: 0.05rem solid var(--ion-color-primary);
+        border-radius: 0.2rem;
+        width:auto;
+        text-align: center;
+        font-weight: 500;
+        text-transform: uppercase;
+        color:var(--ion-color-primary);
+      }
+      &-check{
+        &-gender{
+          background-color: var(--ion-color-primary);
+          color: var(--ion-color-light);
+          border: 0.05rem solid var(--ion-color-light);
+        }
+      }
+      
+
+  
+}
+ion-select{
+    border: 0.05rem solid var(--ion-color-primary);
+    color: var(--ion-color-primary);
+  }
+  .profileImage{
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+  }
+  .imageDisplay {
+    border-radius: 43px;
+    width: 50px;
+    height: 50px;
+    margin-left: -180px;
+  }
+  // input[type=file]{ 
+  //  color:transparent;
+  //   visibility: hidden;
+  // } 
+//   .avatar{
+//     width: 56px;
+//     height: 43px;
+//     //position: absolute;
+//     //left: 39%;
+//     /* top: -73%; */
+//      margin-left: 171px;
+//     /* margin-top: -150px; */
+// }
+// .inputfile {
+//   opacity: 0;
+//   overflow: hidden;
+//   position: absolute;
+//   z-index: 1;
+//   width: 50px;
+//   height: 50px;
+// }
+// .inputfile{
+//   overflow: hidden;
+//   position: absolute;
+//   /* z-index: 0; */
+//   width: 30px;
+//   height: 30px;
+//   margin-left: 198px;
+//   /* top: 219px; */
+//   margin-top: -19px;
+// }
+// .inputfile + label {
+//   font-size: 1.25rem;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   display: inline-block;
+//   overflow: hidden;
+//   width: 50px;
+//   height: 50px;
+//   pointer-events: none;
+//   cursor: pointer;
+//   line-height: 50px;
+//   text-align: center;
+// }

@@ -1,9 +1,51 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>otp</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>NYBOR</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content slot="fixed" class="ion-padding">
+  <!-- <div style="text-align: center;">
+    <p>Enter your</p>
+    <p>verification code</p>
+  </div>
+  <form [formGroup]="otpForm">
+   
+    <ion-item style="margin-top: 75px;">
+      <ion-input formControlName="otp" minLength="6" maxLength="6" type="text" placeholder="OTP"></ion-input>
+    </ion-item>
+  </form>
+  <div style="text-align: center; padding-top: 50px;">
+    <ion-button  color="primary" fill="solid" size="default" (click)="validateOTP()">
+      VERIFY
+
+    </ion-button>
+  </div> -->
+  <div style="text-align: center;">
+    <h3>Please enter the 6-digit verification code we sent via SMS:</h3>
+  </div>
+  <div id="wrapper">
+    <div id="dialog">
+
+      <form [formGroup]="otpForm">
+        <input type="tel" formControlName="otp1" maxLength="1" (keyup)="moveFocus(b)" minlength="1" />
+        <input type="text" #b formControlName="otp2" maxLength="1" minlength="1" (keyup)="moveFocus(c)" />
+        <input type="text" #c formControlName="otp3" maxLength="1" minlength="1" (keyup)="moveFocus(d)" />
+        <input type="text" #d formControlName="otp4" maxLength="1" minlength="1" (keyup)="moveFocus(e)" />
+        <input type="text" #e formControlName="otp5" maxLength="1" minlength="1" (keyup)="moveFocus(f)" />
+        <input type="text" #f formControlName="otp6" maxLength="1" minlength="1"  />
+
+
+        <div style="text-align: center; padding-top: 50px;">
+          <ion-button color="primary" fill="solid" size="default" (click)="validateOTP()">
+            VERIFY
+
+          </ion-button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
 
 </ion-content>

@@ -10,11 +10,6 @@ import { TokenHelper } from '../_helpers/TokenHelper';
 export class Tab3Page {
 
   constructor(private router:Router) {}
-  logout(){
-    TokenHelper.RemoveLoginToken();
-    TokenHelper.RemoveUserDetails();
-    this.router.navigate(['/login'])
-    
-  }
+ 
 
 }
