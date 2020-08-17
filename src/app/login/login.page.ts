@@ -44,6 +44,7 @@ export class LoginPage extends GenericPage implements OnInit {
           TokenHelper.SaveLoginToken(r.token);
           if (r.status === STATUS.OK) {
            
+            
             this.router.navigate(['/otp'])
           } else {
             this.presentToast('Failed to Login',2000,'danger')
