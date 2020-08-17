@@ -1,0 +1,57 @@
+p{
+    color: darkcyan;
+    font-style: italic;
+    font-family: none;
+    font-weight: 600;
+    font-size: large;;
+}
+#wrapper {
+    font-family: Lato;
+    font-size: 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+    color: #333;
+    
+    #dialog {
+     // border: solid 1px #ccc;
+     // margin: 10px auto;
+      padding-top: 100px;
+      display: inline-block;
+     // box-shadow: 0 0 4px #ccc;
+     // background-color: #FAF8F8;
+      overflow: hidden;
+      position: relative;
+      max-width: 450px;
+      
+      h3 {
+        margin: 0 0 10px;
+        padding: 0;
+        line-height: 1.25;
+      }
+      
+        input {
+          
+            margin: 0 5px;
+            text-align: center;
+            line-height: 51px;
+            font-size: 30px;
+            border: solid 1px #ccc;
+            box-shadow: 0 0 5px #ccc inset;
+            outline: none;
+            width: 10%;
+            transition: all 0.2s ease-in-out;
+            border-radius: 3px;
+          
+          &:focus {
+            border-color: purple;
+            box-shadow: 0 0 5px purple inset;
+          }
+          
+          &::selection {
+            background: transparent;
+          }
+        }
+     
+      
+    }
+  }

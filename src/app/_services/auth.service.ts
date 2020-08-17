@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Iaadhar } from '../_models/aadhar';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { TokenHelper } from '../_helpers/TokenHelper';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { TokenHelper } from '../_helpers/TokenHelper';
 export class AuthService {
   public currentUser: Observable<Iaadhar>;
   public currentUserSubject: BehaviorSubject<Iaadhar>;
-  constructor() {
+  constructor(private router:Router) {
     this.currentUserSubject = new BehaviorSubject<Iaadhar>(JSON.parse(TokenHelper.GetUserDetails()));
     this.currentUser = this.currentUserSubject.asObservable();
    }
@@ -22,5 +23,12 @@ export class AuthService {
     console.log(result);
     this.currentUserSubject.next(result);
   
+  }
+  logout(){
+
+    TokenHelper.RemoveLoginToken();
+    TokenHelper.RemoveUserDetails();
+    this.router.navigate(['/login'])
+    
   }
 }

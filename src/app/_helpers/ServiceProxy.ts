@@ -1,10 +1,11 @@
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 // Import RxJs required methods
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { TokenHelper } from './TokenHelper';
+import { throwError } from 'rxjs';
 
 /* Registry of all the routes our app uses */
 export class ServiceRegistry {
@@ -16,6 +17,11 @@ export class ServiceRegistry {
     public static UPDATE_KYC_FILE="kyc/kyc-file";
     public static UPDATE_KYC = 'kyc/kyc-update';
     public static GET_AADHAR_BY_ID ='aadhar/get-aadhar-by-id'
+    public static UPLOAD_IMAGE='profile/image';
+    public static UPDATE_PROFILE_IMAGE='updateProfileImage';
+    public static UPDATE_ID_PROOF='updateIdProof';
+    public static CHANGE_MOBILE_NUMBER = 'changeMobileNumber';
+    public static VALIDATE_OTP_CHANGEMOBILENUMBER='validateOtp/changeMobileNumber';
 }
 
 export enum HttpProtocol {
@@ -48,10 +54,10 @@ export class ServiceProxy {
         headers = headers.set('Authorization', 'Basic ' + TokenHelper.GetLoginToken());
         if (protocol === HttpProtocol.get) {
 
-            const value = this.http.post(url, data, { headers }).pipe(map(this.extractData));
+            const value = this.http.post(url, data, { headers }).pipe(map(this.extractData),catchError(this.handleError));
             return value;
         } else {
-            const value = this.http.post(url, data, { headers }).pipe(map(this.extractData));
+            const value = this.http.post(url, data, { headers }).pipe(map(this.extractData),catchError(this.handleError));
             return value;
         }
     }
@@ -63,7 +69,7 @@ export class ServiceProxy {
      * anything better than Promise.
      */
     public SingleRequest(route: ServiceRegistry, data: any, protocol: HttpProtocol = HttpProtocol.post) {
-
+        
         const url: string = this.FormURI(route);
         let headers = new HttpHeaders();
         headers = headers.set('Authorization', 'Basic ' + TokenHelper.GetLoginToken());
@@ -71,7 +77,7 @@ export class ServiceProxy {
         if (protocol === HttpProtocol.get) {
             return this.http.post(url, data, { headers });
         } else {
-            return this.http.post(url, data, { headers }).pipe(map(this.extractData));
+            return this.http.post(url, data, { headers }).pipe(map(this.extractData),catchError(this.handleError));
         }
 
     }
@@ -95,5 +101,16 @@ export class ServiceProxy {
     }
 
 
-
+   private handleError(error) {
+       
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+          // client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // server-side error
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        return throwError(errorMessage);
+      }
 }

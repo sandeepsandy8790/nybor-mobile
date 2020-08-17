@@ -1,0 +1,30 @@
+<ion-app>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>NYBOR</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content slot="fixed" class="ion-padding">
+      <form [formGroup]="changeMobileForm">
+      
+        <div style="text-align: center;padding-top: 100px;">
+          <p>Enter your new Mobile Number</p>
+          <ion-text>
+          <p>we will send you an One Time Password on this mobile number</p>
+          </ion-text>
+        </div>
+        <ion-item style="padding-top: 40px;">
+          <ion-input formControlName="mobileNumber" minLength="10" maxLength="10" type="text" placeholder="Mobile Number">
+          </ion-input>
+  
+        </ion-item>
+      </form>
+  
+      <div style="text-align: center; padding-top: 50px;">
+        <ion-button  color="primary" fill="solid" size="default" (click)="GetOTP()">
+          REQUEST OTP
+        </ion-button>
+       
+      </div>
+    </ion-content>
+  </ion-app>
