@@ -70,12 +70,12 @@ export class KycPage implements OnInit {
     // console.log((capture[0] as MediaFile).fullPath)
 
 
-    let options: CaptureImageOptions = { limit: 3 };
-    this.mediaCapture.captureImage(options)
-      .then(()=>
-        (data: MediaFile[]) => console.log(data),
-        (err: CaptureError) => console.error(err)
-      );
+    // let options: CaptureImageOptions = { limit: 3 };
+    // this.mediaCapture.captureImage(options)
+    //   .then(
+    //     (data: MediaFile[]) => console.log(data),
+    //     (err: CaptureError) => console.error(err)
+    //   );
 
   };
 
