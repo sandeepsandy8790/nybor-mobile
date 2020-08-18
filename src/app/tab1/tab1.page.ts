@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ declare var google;
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   url = this.serviceProxy.BASE_URL + '/';
   profileImage: any;
   userProfile: Iaadhar;
@@ -23,7 +23,14 @@ export class Tab1Page {
   map: any;
   enable: boolean;
   gender:any
-  constructor(private geolocation: Geolocation, public menuController: MenuController, private router: Router, private auth: AuthService, private serviceProxy: ServiceProxy,) { }
+  currentUser: any;
+  constructor(private geolocation: Geolocation, public menuController: MenuController, private router: Router, private auth: AuthService, private serviceProxy: ServiceProxy,) {
+    
+   }
+   ngOnInit(){
+    this.currentUser = JSON.parse(TokenHelper.GetUserDetails())
+    console.log(this.currentUser.kycStatus)
+   }
 
   ionViewDidEnter() {
 
@@ -43,6 +50,11 @@ export class Tab1Page {
   editProfile() {
     this.menuController.close('first');
     this.router.navigate(['/profile'])
+  }
+
+  updateKYC(){
+    this.menuController.close('first');
+    this.router.navigate(['/kyc'])
   }
   logout(){
     this.menuController.close('first');
