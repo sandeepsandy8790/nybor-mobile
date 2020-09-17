@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ServiceProxy, ServiceRegistry } from '../_helpers/ServiceProxy';
-import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
-import { IKYC, IKYCSTATUS } from '../_models/kyc';
-import { STATUS, Iaadhar } from '../_models/aadhar';
-import { TokenHelper } from '../_helpers/TokenHelper';
+import { MediaCapture, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
+import { STATUS } from '../_models/aadhar';
+import { IKYC } from '../_models/kyc';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-kyc',
+  templateUrl: './kyc.page.html',
+  styleUrls: ['./kyc.page.scss'],
 })
-export class Tab2Page {
+export class KycPage implements OnInit {
 
   kycDocuments: any = [
     { id: 0, documentType: "Passport" },
@@ -29,22 +28,29 @@ export class Tab2Page {
   constructor(private formBuilder: FormBuilder,
     public alertController: AlertController,
     private serviceProxy: ServiceProxy,
-    private mediaCapture: MediaCapture) {
+    private mediaCapture: MediaCapture,
+    private router:Router) { }
+
+  ngOnInit() {
+    this.kycForm = this.formBuilder.group({
+      kyc_document: ['', Validators.required],
+      fileInput: ['', Validators.required]
+    });
+    this.getUser();
+  }
+
+  getUser() {
     let currentUser = this.serviceProxy.SingleRequest(ServiceRegistry.GET_AADHAR_BY_ID, null).subscribe(data => {
       console.log(data.result.length)
-      if (data.status == STATUS.OK && data.result.length>=1) {
+      if (data.status == STATUS.OK && data.result.length >= 1) {
         this.uploadViewStatus = data.result[0].kycStatus
       }
       else {
         this.uploadViewStatus = null
       }
     })
-
-    this.kycForm = this.formBuilder.group({
-      kyc_document: ['', Validators.required],
-      fileInput: ['', Validators.required]
-    });
   }
+
   kycSubmit() {
     console.log(this.kycForm.value);
     let kyc_submit: IKYC = {
@@ -53,6 +59,8 @@ export class Tab2Page {
     }
     this.serviceProxy.SingleRequest(ServiceRegistry.UPDATE_KYC, kyc_submit).subscribe(data => {
       console.log(data)
+      // tab1
+      this.router.navigate(['/tabs'])
     });
 
   }
@@ -60,13 +68,14 @@ export class Tab2Page {
     // let options: VideoCapturePlusOptions = { limit: 1, duration: 30 };
     // let capture:any = await this.videoCapturePlus.captureVideo(options);
     // console.log((capture[0] as MediaFile).fullPath)
-    let options: CaptureImageOptions = { limit: 3 }
-    this.mediaCapture.captureImage(options)
-      .then(
-        (data: MediaFile[]) => console.log(data),
-        (err: CaptureError) => console.error(err)
-      );
 
+
+    // let options: CaptureImageOptions = { limit: 3 };
+    // this.mediaCapture.captureImage(options)
+    //   .then(
+    //     (data: MediaFile[]) => console.log(data),
+    //     (err: CaptureError) => console.error(err)
+    //   );
 
   };
 
@@ -148,4 +157,5 @@ export class Tab2Page {
       // this.pdfFile = false;
     }
   }
+
 }

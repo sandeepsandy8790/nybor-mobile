@@ -32,6 +32,11 @@ const routes: Routes = [
     path: 'mobilenumberchange',
     loadChildren: () => import('./mobilenumberchange/mobilenumberchange.module').then( m => m.MobilenumberchangePageModule),canActivate:[AuthGuard]
   },
+  {
+    path: 'kyc',
+    loadChildren: () => import('./kyc/kyc.module').then( m => m.KycPageModule),canActivate:[AuthGuard]
+  },
+
  
 ];
 @NgModule({

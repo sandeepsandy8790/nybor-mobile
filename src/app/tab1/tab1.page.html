@@ -26,9 +26,14 @@
         <ion-icon name="call-outline" slot="start"></ion-icon>
         <ion-label>Change Mobile Number</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item (click)="updateKYC()">
         <ion-icon name="document-text-outline" slot="start"></ion-icon>
-        <ion-label>KYC</ion-label>
+        <ion-label>KYC <ion-icon *ngIf='this.currentUser.kycStatus===1' color='primary' name="checkmark-done-circle-outline"></ion-icon>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf='this.currentUser.kycStatus==1'>
+        <ion-icon slot='start' name="person-add-outline"></ion-icon>
+        <ion-label>Add Family Member</ion-label>
       </ion-item>
       <ion-item>
         <ion-icon name="headset-outline" slot="start"></ion-icon>
@@ -51,8 +56,8 @@
       <ion-buttons slot="start" (click)="openSideMenu()">
         <ion-avatar *ngIf="enable" slot="start" class="avatar">
           <img *ngIf="profileImage" [src]="url+profileImage" alt="" />
-          <img *ngIf="!profileImage && (gender=='male')" src="../../assets/user-avatar-male.png" alt=""/>
-          <img *ngIf="!profileImage && (gender=='female')" src="../../assets/ser-avatar-female.png" alt=""/>
+          <img *ngIf="!profileImage && (gender=='male')" src="../../assets/user-avatar-male.png" alt="" />
+          <img *ngIf="!profileImage && (gender=='female')" src="../../assets/ser-avatar-female.png" alt="" />
         </ion-avatar>
         <!-- <ion-icon *ngIf="!profileImage" slot="start" name="person-circle-outline"></ion-icon> -->
         <!-- <ion-icon size="large" slot="start" name="person-circle-outline" ></ion-icon> -->

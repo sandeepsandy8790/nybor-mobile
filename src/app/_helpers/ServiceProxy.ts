@@ -14,6 +14,9 @@ export class ServiceRegistry {
     public static MOBILE_LOGIN = 'login';
     public static VALIDATE_OTP='validate-otp';
     public static UPDATE_PROFILE='updateProfile';
+    public static UPDATE_KYC_FILE="kyc/kyc-file";
+    public static UPDATE_KYC = 'kyc/kyc-update';
+    public static GET_AADHAR_BY_ID ='aadhar/get-aadhar-by-id'
     public static UPLOAD_IMAGE='profile/image';
     public static UPDATE_PROFILE_IMAGE='updateProfileImage';
     public static UPDATE_ID_PROOF='updateIdProof';

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>KYC</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">KYC</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div *ngIf='uploadViewStatus==null || uploadViewStatus==undefined'>
+    <h4>To access all the features of Nybor you need complate KYC</h4>
+    <form [formGroup]="kycForm" (ngSubmit)="kycSubmit()">
+      <ion-col>
+        <ion-item>
+          <ion-label>Select Document</ion-label>
+          <ion-select formControlName="kyc_document" name="kyc_document" placeholder="None">
+            <ion-select-option *ngFor="let doc of kycDocuments; let i=index" value="{{doc.id}}" [selected]='i===0'>
+              {{doc.documentType}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <input #selectFile type="file" (change)="onFileChanged($event)" name="kycFile"
+            accept="image/png, image/jpeg, image/jpg, .docx, application/pdf" />
+          <input type="hidden" name="fileHidden" formControlName="fileInput" /> <!-- Validation Field -->
+        </ion-item>
+      </ion-col>
+      <br>
+      <br>
+
+      <ion-col size="1.5" offset="4.5">
+        <ion-button color="primary" (click)="doMediaCapture()" icon-start large round color="dark">VIDEO CAPATURE
+        </ion-button>
+      </ion-col>
+
+
+      <br>
+      <br>
+
+      <ion-col size="1.5" offset="4.5">
+        <ion-button color="primary" size="small" type="submit" [disabled]="!kycForm.valid">Submit</ion-button>
+      </ion-col>
+
+    </form>
+  </div>
+  <div *ngIf='uploadViewStatus == 0'>
+    Your KYC pending. wait for verification
+  </div>
+  <div *ngIf='uploadViewStatus == 1'>
+    Your KYC verified
+  </div>
+
+
+
+</ion-content>

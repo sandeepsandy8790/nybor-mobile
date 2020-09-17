@@ -22,13 +22,16 @@
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/facebook": "^5.27.0",
     "@ionic-native/geolocation": "^5.27.0",
+    "@ionic-native/media-capture": "^5.27.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "com.razorpay.cordova": "^1.4.12",
     "cordova-android": "8.1.0",
     "cordova-plugin-facebook4": "^6.4.0",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
+    "cordova-plugin-media-capture": "^3.0.3",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -75,9 +78,12 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "209741693693693",
-        "APP_NAME": "myFirstApp"
+        "APP_NAME": "myFirstApp",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
       },
       "cordova-plugin-geolocation": {},
+      "cordova-plugin-media-capture": {},
       "com.razorpay.cordova": {}
     },
     "platforms": [

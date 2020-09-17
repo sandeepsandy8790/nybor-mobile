@@ -9,7 +9,16 @@ import { TokenHelper } from '../_helpers/TokenHelper';
 })
 export class Tab3Page {
 
-  constructor(private router:Router) {}
- 
+  currentUser:any
+  constructor(private router:Router) {
+    this.currentUser = JSON.parse(TokenHelper.GetUserDetails())
+    console.log(this.currentUser.kycStatus)
+  }
+  logout(){
+    TokenHelper.RemoveLoginToken();
+    TokenHelper.RemoveUserDetails();
+    this.router.navigate(['/login'])
+    
+  }
 
 }
