@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add Family</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <form [formGroup]="addFamilyForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <!-- <ion-label position="floating">MobileNumber</ion-label> -->
+        <ion-input type="tel" maxlength ='10' minlength='10' placeholder="Mobile Number" formControlName="mobileNumber" (change)='onChangeMobile($event.target.value)'>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <!-- <ion-label position="floating">Full Name</ion-label> -->
+        <ion-input type="text" placeholder= "Full Name" formControlName="fullName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <!-- <ion-label position="floating">Relation</ion-label> -->
+        <ion-input type="text" placeholder = "Relation" formControlName="relation"></ion-input>
+      </ion-item>
+      <ion-button color="primary" size="mediuam" type="submit" [disabled]="!addFamilyForm.valid">Submit</ion-button>
+
+    </form>
+  </ion-list>
+
+
+</ion-content>

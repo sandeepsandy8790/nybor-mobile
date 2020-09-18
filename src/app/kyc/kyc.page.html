@@ -10,7 +10,7 @@
       <ion-title size="large">KYC</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div *ngIf='uploadViewStatus==null || uploadViewStatus==undefined'>
+  <div *ngIf='uploadViewStatus==null || uploadViewStatus==undefined || uploadViewStatus == 2'>
     <h4>To access all the features of Nybor you need complate KYC</h4>
     <form [formGroup]="kycForm" (ngSubmit)="kycSubmit()">
       <ion-col>
@@ -26,7 +26,8 @@
         <ion-item>
           <input #selectFile type="file" (change)="onFileChanged($event)" name="kycFile"
             accept="image/png, image/jpeg, image/jpg, .docx, application/pdf" />
-          <input type="hidden" name="fileHidden" formControlName="fileInput" /> <!-- Validation Field -->
+          <input type="hidden" name="fileHidden" formControlName="fileInput" /> 
+          
         </ion-item>
       </ion-col>
       <br>

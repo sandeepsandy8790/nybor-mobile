@@ -4,7 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { Iaadhar } from '../_models/aadhar';
-import { ServiceProxy } from '../_helpers/ServiceProxy';
+import { ServiceProxy, ServiceRegistry } from '../_helpers/ServiceProxy';
 import { TokenHelper } from '../_helpers/TokenHelper';
 
 declare var google;
@@ -28,12 +28,33 @@ export class Tab1Page implements OnInit {
     
    }
    ngOnInit(){
-    this.currentUser = JSON.parse(TokenHelper.GetUserDetails())
-    console.log(this.currentUser.kycStatus)
+    this.auth.currentUserSubject.subscribe((data) => {
+      console.log(data)
+      this.currentUser = data;
+    });
+    // this.currentUser = JSON.parse(TokenHelper.GetUserDetails())
+    // console.log(this.currentUser.kycStatus)
+   }
+
+   //get latest user details 
+
+   async getUserDetails(){
+    this.auth.currentUserSubject.subscribe((data) => {
+      console.log(data)
+      this.currentUser = data;
+    });
+    const aadhar: Iaadhar = new Iaadhar();
+    aadhar.mobileNumber = this.currentUser.mobileNumber;
+    await this.serviceProxy.SingleRequest(ServiceRegistry.GET_AADHAR_BY_MOBILE, aadhar)
+    .subscribe(async (arg) => {
+      TokenHelper.SaveUserDetails(arg.result[0]);
+      this.auth.currentUserSubject.next(arg.result[0]);
+
+    })
    }
 
   ionViewDidEnter() {
-
+    this.getUserDetails();
     this.auth.currentUserSubject.subscribe((data) => {
       this.userProfile = data;
       console.log(this.userProfile)
@@ -54,7 +75,11 @@ export class Tab1Page implements OnInit {
 
   updateKYC(){
     this.menuController.close('first');
-    this.router.navigate(['/kyc'])
+    this.router.navigate(['/kyc']);
+  }
+  family(){
+    this.menuController.close('first');
+    this.router.navigate(['family']);
   }
   logout(){
     this.menuController.close('first');

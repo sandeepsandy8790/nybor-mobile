@@ -6,6 +6,8 @@ import { MediaCapture, CaptureImageOptions } from '@ionic-native/media-capture/n
 import { STATUS } from '../_models/aadhar';
 import { IKYC } from '../_models/kyc';
 import { Router } from '@angular/router';
+import { TokenHelper } from '../_helpers/TokenHelper';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-kyc',
@@ -29,7 +31,8 @@ export class KycPage implements OnInit {
     public alertController: AlertController,
     private serviceProxy: ServiceProxy,
     private mediaCapture: MediaCapture,
-    private router:Router) { }
+    private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.kycForm = this.formBuilder.group({
@@ -41,9 +44,9 @@ export class KycPage implements OnInit {
 
   getUser() {
     let currentUser = this.serviceProxy.SingleRequest(ServiceRegistry.GET_AADHAR_BY_ID, null).subscribe(data => {
-      console.log(data.result.length)
-      if (data.status == STATUS.OK && data.result.length >= 1) {
+      if (data.status == STATUS.OK && data.result!=null) {
         this.uploadViewStatus = data.result[0].kycStatus
+        console.log(data.result[0].kycStatus)
       }
       else {
         this.uploadViewStatus = null
@@ -59,6 +62,8 @@ export class KycPage implements OnInit {
     }
     this.serviceProxy.SingleRequest(ServiceRegistry.UPDATE_KYC, kyc_submit).subscribe(data => {
       console.log(data)
+      TokenHelper.SaveUserDetails(data.result);
+      this.auth.currentUserSubject.next(data.result);
       // tab1
       this.router.navigate(['/tabs'])
     });

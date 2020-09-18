@@ -7,5 +7,6 @@ export class IKYC{
 
 export enum IKYCSTATUS {
     PENDDING,
-    VERIFIED
+    VERIFIED,
+    FAMILY_KYC
   }

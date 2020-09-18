@@ -35,7 +35,15 @@ const routes: Routes = [
   {
     path: 'kyc',
     loadChildren: () => import('./kyc/kyc.module').then( m => m.KycPageModule),canActivate:[AuthGuard]
+  },  {
+    path: 'addfamily',
+    loadChildren: () => import('./addfamily/addfamily.module').then( m => m.AddfamilyPageModule)
   },
+  {
+    path: 'family',
+    loadChildren: () => import('./family/family.module').then( m => m.FamilyPageModule)
+  }
+
 
  
 ];

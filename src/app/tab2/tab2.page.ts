@@ -31,8 +31,7 @@ export class Tab2Page {
     private serviceProxy: ServiceProxy,
     private mediaCapture: MediaCapture) {
     let currentUser = this.serviceProxy.SingleRequest(ServiceRegistry.GET_AADHAR_BY_ID, null).subscribe(data => {
-      console.log(data.result.length)
-      if (data.status == STATUS.OK && data.result.length>=1) {
+      if (data.status == STATUS.OK && data.result!=null) {
         this.uploadViewStatus = data.result[0].kycStatus
       }
       else {

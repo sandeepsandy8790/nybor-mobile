@@ -22,6 +22,10 @@ export class ServiceRegistry {
     public static UPDATE_ID_PROOF='updateIdProof';
     public static CHANGE_MOBILE_NUMBER = 'changeMobileNumber';
     public static VALIDATE_OTP_CHANGEMOBILENUMBER='validateOtp/changeMobileNumber';
+    public static GET_AADHAR_BY_MOBILE = 'aadhar/get-by-mobile';
+    public static ADD_FAMILY_MEMBER ='family/add-family-member';
+    public static FAMILY_INVITATION = 'family/add-aadhar-add-family-member';
+    public static GET_FAMILY_BY_ID ='family/get-family-by-id';
 }
 
 export enum HttpProtocol {
