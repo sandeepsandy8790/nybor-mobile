@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { ServiceProxy, ServiceRegistry } from '../_helpers/ServiceProxy';
 import { MediaCapture, CaptureImageOptions } from '@ionic-native/media-capture/ngx';
-import { STATUS } from '../_models/aadhar';
+import { Iaadhar, STATUS } from '../_models/aadhar';
 import { IKYC } from '../_models/kyc';
 import { Router } from '@angular/router';
 import { TokenHelper } from '../_helpers/TokenHelper';
@@ -26,20 +26,26 @@ export class KycPage implements OnInit {
   private kycForm: FormGroup;
   selectedFile: any;
   uploadViewStatus: any;
+  currentUser:Iaadhar;
 
   constructor(private formBuilder: FormBuilder,
     public alertController: AlertController,
     private serviceProxy: ServiceProxy,
     private mediaCapture: MediaCapture,
     private router: Router,
-    private auth: AuthService) { }
+    private auth: AuthService,
+    private toastController: ToastController,) { }
 
   ngOnInit() {
     this.kycForm = this.formBuilder.group({
       kyc_document: ['', Validators.required],
       fileInput: ['', Validators.required]
     });
-    this.getUser();
+    this.auth.currentUserSubject.subscribe((data) => {
+      console.log(data)
+      this.currentUser = data;
+    });
+    //this.getUser();
   }
 
   getUser() {
@@ -65,7 +71,11 @@ export class KycPage implements OnInit {
       TokenHelper.SaveUserDetails(data.result);
       this.auth.currentUserSubject.next(data.result);
       // tab1
-      this.router.navigate(['/tabs'])
+      this.showtoast()
+      setTimeout(() => {
+        this.router.navigate(['/tabs'])
+      }, 2000);
+     
     });
 
   }
@@ -86,9 +96,9 @@ export class KycPage implements OnInit {
 
   async presentAlert(filename) {
     const alert = await this.alertController.create({
-      header: 'FILE/IMAGE Upload',
+      header: 'Document Upload',
       // subHeader: filename,
-      message: 'Nybor would like to upload this ' + filename + ' file to your KYC Verification?',
+      message: 'Nybor would like to upload this document for your KYC Verification?',
       buttons: [
         {
           text: 'Cancel',
@@ -161,6 +171,15 @@ export class KycPage implements OnInit {
       // this.previewUrl = '';
       // this.pdfFile = false;
     }
+  }
+ async  showtoast(){
+    const toast = await this.toastController.create({
+      color: 'success',
+      duration: 2000,
+      message: 'Documents Uploaded',
+      // showCloseButton: true
+    });
+    await toast.present();
   }
 
 }

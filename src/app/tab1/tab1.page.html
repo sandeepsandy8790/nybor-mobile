@@ -29,31 +29,35 @@
       <ion-item (click)="updateKYC()">
         <ion-icon name="document-text-outline" slot="start"></ion-icon>
         <ion-label>KYC
-          <ion-icon *ngIf='this.currentUser.kycStatus===1' color='primary' name="checkmark-done-circle-outline">
+          
+          <!-- <ion-icon *ngIf='this.currentUser.kycStatus===1' color='warning' name="checkmarkoutline">
           </ion-icon>
-          <ion-icon *ngIf='this.currentUser.kycStatus===2' color='warning' name="checkmark-done-circle-outline">
+          <ion-icon *ngIf='this.currentUser.kycStatus===2' color='primary' name="checkmark-outline">
 
-          </ion-icon>
+          </ion-icon> -->
         </ion-label>
+        <ion-badge *ngIf='this.currentUser.kycStatus===0' color="danger" slot="end">Pending</ion-badge>
+          <ion-badge *ngIf='this.currentUser.kycStatus===1' color="warning" slot="end">In Process</ion-badge>
+          <ion-badge *ngIf='this.currentUser.kycStatus===2' color="success" slot="end">Verified</ion-badge>
       </ion-item>
       <!-- <ion-item *ngIf='this.currentUser.kycStatus==1 || this.currentUser.kycStatus==2 ' (click)="addFamily()">
         <ion-icon slot='start' name="person-add-outline"></ion-icon>
         <ion-label>Add Family Member</ion-label>
       </ion-item> -->
 
-      <ion-item  (click)="family()">
+      <ion-item  (click)="addFamily()">
         <ion-icon slot='start' name="people-outline"></ion-icon>
-        <ion-label>Family</ion-label>
+        <ion-label>Add Family</ion-label>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon name="headset-outline" slot="start"></ion-icon>
         <ion-label>Contact us</ion-label>
       </ion-item>
       <ion-item>
         <ion-icon name="help-outline" slot="start"></ion-icon>
         <ion-label>Help & Support</ion-label>
-      </ion-item>
+      </ion-item> -->
       <ion-item (click)="logout()">
         <ion-icon name="power-outline" slot="start"></ion-icon>
         <ion-label>Log out</ion-label>

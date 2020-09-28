@@ -77,9 +77,9 @@ export class Tab1Page implements OnInit {
     this.menuController.close('first');
     this.router.navigate(['/kyc']);
   }
-  family(){
+  addFamily(){
     this.menuController.close('first');
-    this.router.navigate(['family']);
+    this.router.navigate(['addfamily']);
   }
   logout(){
     this.menuController.close('first');

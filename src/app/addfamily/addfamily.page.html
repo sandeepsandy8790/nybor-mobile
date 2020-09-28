@@ -1,12 +1,17 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Add Family</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none">
-    <form [formGroup]="addFamilyForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="currentUser.kycStatus==0">
+    <h4 class="ion-margin">To access all the features of Nybor you need complete KYC</h4>
+  </div>
+  <div *ngIf="currentUser.kycStatus==1">
+    <h4 class="ion-margin">KYC Verification Pending</h4>
+  </div>
+    <form *ngIf="currentUser.kycStatus==2" [formGroup]="addFamilyForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <!-- <ion-label position="floating">MobileNumber</ion-label> -->
         <ion-input type="tel" maxlength ='10' minlength='10' placeholder="Mobile Number" formControlName="mobileNumber" (change)='onChangeMobile($event.target.value)'>
@@ -20,10 +25,11 @@
         <!-- <ion-label position="floating">Relation</ion-label> -->
         <ion-input type="text" placeholder = "Relation" formControlName="relation"></ion-input>
       </ion-item>
-      <ion-button color="primary" size="mediuam" type="submit" [disabled]="!addFamilyForm.valid">Submit</ion-button>
+      <br>
+      <ion-button class="ion-margin" color="primary" size="medium" expand="block" type="submit" [disabled]="!addFamilyForm.valid">Submit</ion-button>
 
     </form>
-  </ion-list>
+
 
 
 </ion-content>

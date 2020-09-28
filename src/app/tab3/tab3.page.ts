@@ -20,5 +20,7 @@ export class Tab3Page {
     this.router.navigate(['/login'])
     
   }
-
+  myFamily(){
+    this.router.navigate(['/family'])
+  }
 }

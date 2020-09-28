@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceRegistry, ServiceProxy } from '../_helpers/ServiceProxy';
 import { AuthService } from '../_services/auth.service';
 import { IAddFamily } from '../_models/family';
+import { Iaadhar } from '../_models/aadhar';
 
 @Component({
   selector: 'app-family',
@@ -9,8 +10,9 @@ import { IAddFamily } from '../_models/family';
   styleUrls: ['./family.page.scss'],
 })
 export class FamilyPage implements OnInit {
-  currentUser: import("c:/Users/vijay/Desktop/nybor-mobile/src/app/_models/aadhar").Iaadhar;
+  currentUser: Iaadhar;
   familyMembers: any;
+  enable: boolean;
 
   constructor(private serviceProxy: ServiceProxy,
     private auth: AuthService) { }
@@ -30,6 +32,8 @@ export class FamilyPage implements OnInit {
     let Members = this.serviceProxy.SingleRequest(ServiceRegistry.GET_FAMILY_BY_ID, family).subscribe(data => {
       console.log(data.result)
       this.familyMembers = data.result
+      console.log(this.familyMembers.length)
+      this.enable=true
     })
   }
 

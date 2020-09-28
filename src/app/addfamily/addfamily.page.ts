@@ -19,14 +19,14 @@ export class AddfamilyPage implements OnInit {
   userData: any;
   memberExists: boolean;
   memberAadharID: string;
-  memberKYCStatus:any;
+  memberKYCStatus: any;
   currentUser: Iaadhar;
   constructor(private formBuilder: FormBuilder,
     private serviceProxy: ServiceProxy,
     public alertController: AlertController,
     private auth: AuthService,
     public toastController: ToastController,
-    private router:Router
+    private router: Router
 
   ) { }
 
@@ -38,15 +38,15 @@ export class AddfamilyPage implements OnInit {
     });
   }
 
-      async handleButtonClick() {
-      const toast = await this.toastController.create({
-        color: 'success',
-        duration: 2000,
-        message: 'Family Member added.',
-        // showCloseButton: true
-      });
-      await toast.present();
-    }
+  async handleButtonClick() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      duration: 2000,
+      message: 'Family Member added.',
+      // showCloseButton: true
+    });
+    await toast.present();
+  }
 
   onSubmit() {
     console.log(this.addFamilyForm.value)
@@ -58,10 +58,10 @@ export class AddfamilyPage implements OnInit {
         memberName: this.addFamilyForm.value.fullName,
         memberAadharID: this.memberAadharID,
         memberMobileNumber: this.addFamilyForm.value.mobileNumber,
-        memberKYCStatus : this.memberKYCStatus
-        
+        memberKYCStatus: this.memberKYCStatus
+
       }
-      
+
       this.serviceProxy.SingleRequest(ServiceRegistry.ADD_FAMILY_MEMBER, addfamily)
         .subscribe(async (arg) => {
           console.log(arg)
@@ -79,7 +79,7 @@ export class AddfamilyPage implements OnInit {
         memberName: this.addFamilyForm.value.fullName,
         memberAadharID: this.memberAadharID,
         memberMobileNumber: this.addFamilyForm.value.mobileNumber,
-        memberKYCStatus: IKYCSTATUS.FAMILY_KYC
+        memberKYCStatus: IKYCSTATUS.PENDDING
       }
       this.serviceProxy.SingleRequest(ServiceRegistry.FAMILY_INVITATION, addfamily)
         .subscribe(async (arg) => {
@@ -93,7 +93,7 @@ export class AddfamilyPage implements OnInit {
 
 
   }
-  
+
 
   setFamilyForm() {
     this.addFamilyForm = this.formBuilder.group({
@@ -112,16 +112,16 @@ export class AddfamilyPage implements OnInit {
     this.serviceProxy.SingleRequest(ServiceRegistry.GET_AADHAR_BY_MOBILE, aadhar)
       .subscribe(async (arg) => {
         console.log(arg.result)
-        if (arg.result!=null && arg.status == STATUS.OK) {
+        if (arg.result != null && arg.status == STATUS.OK) {
           this.memberExists = true;
           this.memberAadharID = arg.result[0].id;
           this.memberKYCStatus = arg.result[0].kycStatus;
           this.userData = arg.result[0];
           this.presentAlert(this.userData)
         }
-        else{
-          this.memberAadharID='',
-          this.memberExists= false;
+        else {
+          this.memberAadharID = '',
+            this.memberExists = false;
         }
       })
   }

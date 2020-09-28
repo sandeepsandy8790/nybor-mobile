@@ -8,9 +8,14 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngIf='this.currentUser.kycStatus==1'>
+    <!-- <ion-item *ngIf='this.currentUser.kycStatus==1'>
       <ion-icon slot='start' name="person-add-outline"></ion-icon>
       <ion-label>Add Family Member</ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item> -->
+    <ion-item (click)="myFamily()">
+      <ion-icon slot="start"  name="person"></ion-icon>
+      <ion-label>My Family</ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
     <ion-item>
@@ -23,11 +28,11 @@
       <ion-label>Help & Support</ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
     </ion-item>
-    <ion-item (click)="logout()">
+    <!-- <ion-item (click)="logout()">
       <ion-icon slot="start" name="power-outline"></ion-icon>
       <ion-label>Log Out</ion-label>
       <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
   
